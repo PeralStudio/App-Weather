@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <title>Clima</title>
+</head>
+<body id="body">
+    <!-- Switch Modo claro/oscuro -->
+    <!-- <label class="switch">
+        <input type="checkbox" checked>
+        <span class="slider round"></span>
+      </label> -->
+    <h1 id="h1Text"></h1>
+    <div class="container">
+        <input type="text" id="inputCiudad" placeholder="Ciudad..."/>
+        <input type="button" class="button btn btn-dark btn-sm" onclick="Callweather()" value="Go" style="margin-left:5px" >
+    </div>
+    <div class="container-temp">
+        <img id="icon" src="" alt="">
+        <P id="temp"></P>
+        <p id="temp-max"></p>
+        <p id="temp-min"></p>
+    </div>
+
+    <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>
+</html>
