@@ -74,7 +74,7 @@ function Callweather() {
             
             document.getElementById("h1Text").innerHTML = data.name;
             document.getElementById("temp").innerHTML = `${temp} °C`;
-            document.getElementById("temp").style = "border-radius: 10px; padding: 10px; text-shadow: 2px 8px rgba(0, 0, 0, 0.5)";
+            document.getElementById("temp").style = "border-radius: 10px; padding: 10px; text-shadow:  3px 3px grey";
             document.getElementById("temp-max").innerHTML = `Máxima: ${maxTemp}°C`;
             document.getElementById("temp-min").innerHTML = `Mínima: ${minTemp}°C`;
             document.getElementById("icon").style= "display: flex;";
