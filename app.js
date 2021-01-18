@@ -4,7 +4,7 @@ document.querySelector(".container-temp").style = "background-color: transparent
 
 function Callweather() {
 
-    var apiKey = "40efccd434eefd0344923485b60fbda7";
+    var apiKey = "xxx";
     var cityName = document.getElementById("inputCiudad").value;
     
     /* console.log(cityName); */
