@@ -1,10 +1,20 @@
 document.getElementById("icon").style= "display: none;";
 document.querySelector(".container-temp").style = "background-color: transparent;";
 
+const searchbox = document.querySelector(".inputCiudad");
+searchbox.addEventListener('keypress', setQuery);
+
+function setQuery(event) {
+    if(event.which === 13) {
+        /* console.log(searchbox.value); */
+        Callweather();
+    }
+}
+
 
 function Callweather() {
 
-    var apiKey = "xxx";
+    var apiKey = "40efccd434eefd0344923485b60fbda7";
     var cityName = document.getElementById("inputCiudad").value;
     
     /* console.log(cityName); */

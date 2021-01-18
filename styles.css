@@ -13,6 +13,12 @@ p {
     font-size: 25px;
 }
 
+/* .inputCiudad {
+  border: none;
+  border-radius: 16px 0px 16px 0px;
+  border-bottom: 3px solid #3B444F;
+} */
+
 .container {
     display: flex;
     justify-content: center;
