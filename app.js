@@ -31,14 +31,14 @@ function Callweather() {
 
         }else {
             var icon = "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
-            var temp = parseFloat(data.main.temp - kelvin, 10).toFixed(1);
-            var maxTemp = parseFloat(data.main.temp_max - kelvin, 10).toFixed(1);
-            var minTemp = parseFloat(data.main.temp_min - kelvin, 10).toFixed(1);
+            var temp = parseFloat(data.main.temp - kelvin, 10).toFixed(0);
+            var maxTemp = parseFloat(data.main.temp_max - kelvin, 10).toFixed(0);
+            var minTemp = parseFloat(data.main.temp_min - kelvin, 10).toFixed(0);
             /* console.log(temp); */
             
             document.getElementById("h1Text").innerHTML = data.name;
             document.getElementById("temp").innerHTML = `${temp} °C`;
-            document.getElementById("temp").style = "background-color: black; border-radius: 10px; padding: 10px;";
+            document.getElementById("temp").style = "border-radius: 10px; padding: 10px; text-shadow: 2px 8px rgba(0, 0, 0, 0.5)";
             document.getElementById("temp-max").innerHTML = `Máxima: ${maxTemp}°C`;
             document.getElementById("temp-min").innerHTML = `Mínima: ${minTemp}°C`;
             document.getElementById("icon").style= "display: flex;";
