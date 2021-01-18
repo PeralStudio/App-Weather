@@ -12,21 +12,47 @@ function setQuery(event) {
 }
 
 
+//SPINNER
+const spinner = document.getElementById("spinner");
+
+function showSpinner() {
+    spinner.className = "show";
+    setTimeout(() => {
+    spinner.className = spinner.className.replace("show", "");
+  }, 1000);
+}
+
+//SPINNER STOP
+function hideSpinner() {
+    spinner.className = spinner.className.replace("show", "");
+}
+
+
 function Callweather() {
 
     var apiKey = "40efccd434eefd0344923485b60fbda7";
     var cityName = document.getElementById("inputCiudad").value;
-    
     /* console.log(cityName); */
+
+    //Show Spinner
+    showSpinner();
 
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`)
     .then(res => res.json())
     .then(data => {
+        //Hide Spinner When Data Ready
+        hideSpinner();
 
         const kelvin = 273.15;
         
         if(data.name === undefined) {
+            
             document.getElementById("h1Text").innerHTML = "Ciudad no encontrada";
+            //Timeout Error Message
+            setTimeout(() => {
+            document.getElementById("h1Text").innerHTML = "";
+            }, 1500);
+
             document.getElementById("temp").innerHTML = "";
             document.getElementById("icon").innerHTML = "";
             document.getElementById("inputCiudad").value = "";
