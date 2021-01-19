@@ -40,10 +40,21 @@ function Callweather() {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`)
     .then(res => res.json())
     .then(data => {
-        //Hide Spinner When Data Ready
+        //Hide Spinner Cuando la Data esta lista
         hideSpinner();
 
         const kelvin = 273.15;
+        //Comprobar si input es void y mostrar toast
+        if(searchbox.value == "") {
+            /* console.log("vacio"); */
+            var x = document.getElementById("toast");
+            x.className = "show";
+            setTimeout(function(){
+                 x.className = x.className.replace("show", ""); 
+                }, 3000);
+            
+            return;
+        }
         
         if(data.name === undefined) {
             
@@ -64,6 +75,8 @@ function Callweather() {
             document.getElementById("temp").style = "";
             document.getElementById("temp-max").innerHTML = "";
             document.getElementById("temp-min").innerHTML = "";
+
+            
 
         }else {
             var icon = "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
