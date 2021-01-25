@@ -11,6 +11,17 @@ function setQuery(event) {
     }
 }
 
+/* // Auto Detect City, Not work in mobile and Ublock
+function autoDetectCity() {
+    fetch(`http://ip-api.com/json`)
+    .then( res => res.json())
+    .then(response => {
+        document.querySelector(".inputCiudad").value = response.city;
+     })
+     .catch(status => {
+        console.log('Request failed.  Returned status of', status)
+     })
+  } */
 
 //SPINNER
 const spinner = document.getElementById("spinner");
@@ -128,15 +139,3 @@ function Callweather() {
         
     });
 }
-
-//Switch Cambiar modo claro/oscuro...
-/* var checkbox = document.querySelector('input[type="checkbox"]');
-checkbox.addEventListener('change', function () {
-    if (checkbox.checked) {
-        document.querySelector('body').style = "background-color: white; color: black;"
-      console.log('Checked');
-    } else {
-        document.querySelector('body').style = "background-color: black; color: white;"
-      console.log('Not checked');
-    }
-  }); */

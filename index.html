@@ -10,16 +10,12 @@
     <title>Clima</title>
 </head>
 <body id="body">
-    <!-- Switch Modo claro/oscuro -->
-    <!-- <label class="switch">
-        <input type="checkbox" checked>
-        <span class="slider round"></span>
-      </label> -->
     <h1 id="h1Text"></h1>
     <div class="container">
         <div id="toast">Introduce Ciudad</div>
         <input type="text" id="inputCiudad" class="inputCiudad" autocomplete="off" placeholder="Ciudad..."/>
         <input type="button" class="button btn btn-dark btn-sm" onclick="Callweather()" value="Go" style="margin-left:5px" >
+        <!--Atodetect City not work in mobile <input type="button" class="button btn btn-dark btn-sm" onclick="autoDetectCity()" value="Auto Detect" style="margin-left:5px" > -->
     </div>
     <div id="spinner"></div> 
     <div class="container-temp">
