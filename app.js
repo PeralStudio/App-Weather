@@ -61,7 +61,7 @@ function Callweather() {
             var x = document.getElementById("toast");
             x.className = "show";
             setTimeout(function(){
-                 x.className = x.className.replace("show", ""); 
+                x.className = x.className.replace("show", "");
                 }, 3000);
             
             return;
@@ -105,37 +105,32 @@ function Callweather() {
             document.getElementById("icon").src = icon;
             document.querySelector(".container-temp").style = "background-color: rgba(0, 0, 0, 0.6); border-radius:20px;";
             document.getElementById("h1Text").style = "background-color: rgba(0, 0, 0, 0.6); border-radius:20px; width:50%;";
-
-            //posibilidades iconos segun tiempo
-            if(data.weather[0].icon === "01d")/* Dia Soleado */ {
-                document.querySelector("body").style = "background-image: url(images/soleado2.jpg); background-size: cover; background-repeat: no-repeat;"
-            }if(data.weather[0].icon === "01n")/* Noche Despejada */ {
-                document.querySelector("body").style = "background-image: url(images/noche-despejada.jpg); background-size: cover; background-repeat: no-repeat;"
-            }if(data.weather[0].icon === "04d" || data.weather[0].icon === "03d" || data.weather[0].icon === "02d")/* Nublado */ {
-                document.querySelector("body").style = "background-image: url(images/nublado.jpg); background-size: cover; background-repeat: no-repeat;"
-            }if(data.weather[0].icon === "04n" || data.weather[0].icon === "03n" || data.weather[0].icon === "02n" || data.weather[0].icon === "04n")/* Noche Nublado */ {
-                document.querySelector("body").style = "background-image: url(images/nublado-noche.jpg); background-size: cover; background-repeat: no-repeat;"
-            }if(data.weather[0].icon === "50d")/* Niebla */ {
-                document.querySelector("body").style = "background-image: url(images/niebla.jpg); background-size: cover; background-repeat: no-repeat;"
-            }if(data.weather[0].icon === "50n")/* Noche Niebla */ {
-                document.querySelector("body").style = "background-image: url(images/niebla-noche.jpg); background-size: cover; background-repeat: no-repeat;"
-            }if(data.weather[0].icon === "10d")/* Lluvia */ {
-                document.querySelector("body").style = "background-image: url(images/lluvia.jpg); background-size: cover; background-repeat: no-repeat;"
-            }if(data.weather[0].icon === "10n" || data.weather[0].icon === "09n")/* Noche Lluvia */ {
-                document.querySelector("body").style = "background-image: url(images/lluvia-noche.jpg); background-size: cover; background-repeat: no-repeat;"
-            }if(data.weather[0].icon === "13d")/* Nieve */ {
-                document.querySelector("body").style = "background-image: url(images/nieve.jpg); background-size: cover; background-repeat: no-repeat;"
-            }if(data.weather[0].icon === "13n")/* Noche Nieve */ {
-                document.querySelector("body").style = "background-image: url(images/nieve-noche.jpg); background-size: cover; background-repeat: no-repeat;"
+            
+            var backUrlCss = "background-size: cover; background-repeat: no-repeat;";
+            switch (data.weather[0].icon) {
+                case "01d": document.querySelector("body").style = `background-image: url(images/soleado2.jpg); ${backUrlCss}`;
+                    break;
+                case "01n": document.querySelector("body").style = `background-image: url(images/noche-despejada.jpg); ${backUrlCss}`;
+                    break;
+                case "04d": case "03d": case "02d": document.querySelector("body").style = `background-image: url(images/nublado.jpg); ${backUrlCss}`;
+                    break;
+                case "04n": case "03n": case "02n": case "04n": document.querySelector("body").style = `background-image: url(images/nublado-noche.jpg); ${backUrlCss}`;
+                    break;
+                case "50d": document.querySelector("body").style = `background-image: url(images/niebla.jpg); ${backUrlCss}`;
+                    break;
+                case "50n": document.querySelector("body").style = `background-image: url(images/niebla-noche.jpg); ${backUrlCss}`;
+                    break;
+                case "10d": document.querySelector("body").style = `background-image: url(images/lluvia.jpg); ${backUrlCss}`;
+                    break;
+                case "10n": case "09n": document.querySelector("body").style = `background-image: url(images/lluvia-noche.jpg); ${backUrlCss}`;
+                    break;
+                case "13d": document.querySelector("body").style = `background-image: url(images/nieve.jpg); ${backUrlCss}`;
+                    break;
+                case "13n": document.querySelector("body").style = `background-image: url(images/nieve-noche.jpg); ${backUrlCss}`;
+                    break;
             }
-
-            /*console.log(data.weather[0].icon);
-            console.log(data.weather[0].main);
-            console.log(data); */
-
 
             document.getElementById("inputCiudad").value = "";
         }
-        
     });
 }
