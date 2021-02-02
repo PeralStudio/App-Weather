@@ -17,10 +17,10 @@ function autoDetectCity() {
     .then( res => res.json())
     .then(response => {
         document.querySelector(".inputCiudad").value = response.city;
-     })
-     .catch(status => {
+    })
+    .catch(status => {
         console.log('Request failed.  Returned status of', status)
-     })
+    })
   } */
 
 //SPINNER
@@ -29,8 +29,8 @@ const spinner = document.getElementById("spinner");
 function showSpinner() {
     spinner.className = "show";
     setTimeout(() => {
-    spinner.className = spinner.className.replace("show", "");
-  }, 1000);
+        spinner.className = spinner.className.replace("show", "");
+    }, 1000);
 }
 
 //SPINNER STOP
