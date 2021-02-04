@@ -1,6 +1,7 @@
 document.getElementById("icon").style= "display: none;";
 document.querySelector(".container-temp").style = "background-color: transparent;";
 
+const h1TextStyle = "background-color: rgba(0, 0, 0, 0.6); border-radius:20px;"
 const searchbox = document.querySelector(".inputCiudad");
 searchbox.addEventListener('keypress', setQuery);
 
@@ -29,7 +30,7 @@ const spinner = document.getElementById("spinner");
 function showSpinner() {
     spinner.className = "show";
     setTimeout(() => {
-        spinner.className = spinner.className.replace("show", "");
+        hideSpinner();
     }, 1000);
 }
 
@@ -68,29 +69,26 @@ function Callweather() {
         }
         
         if(data.name === undefined) {
-            
             document.getElementById("h1Text").innerHTML = "Ciudad no encontrada";
             //Timeout Error Message
             setTimeout(() => {
-            document.getElementById("h1Text").innerHTML = "";
+                document.getElementById("h1Text").innerHTML = "";
             }, 1500);
-
+            
             document.getElementById("temp").innerHTML = "";
             document.getElementById("icon").innerHTML = "";
             document.getElementById("inputCiudad").value = "";
             document.getElementById("icon").style= "display: none;";
             document.querySelector("body").style = ""
             document.querySelector(".container-temp").style = "";
-            document.getElementById("h1Text").style = "background-color: rgba(0, 0, 0, 0.6); border-radius:20px;";
+            document.getElementById("h1Text").style = h1TextStyle;
             document.getElementById("temp").innerHTML = "";
             document.getElementById("temp").style = "";
             document.getElementById("temp-max").innerHTML = "";
             document.getElementById("temp-min").innerHTML = "";
 
-            
-
         }else {
-            var icon = "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png";
+            var icon = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
             var temp = parseFloat(data.main.temp - kelvin, 10).toFixed(0);
             var maxTemp = parseFloat(data.main.temp_max - kelvin, 10).toFixed(0);
             var minTemp = parseFloat(data.main.temp_min - kelvin, 10).toFixed(0);
@@ -103,8 +101,8 @@ function Callweather() {
             document.getElementById("temp-min").innerHTML = `Mínima: ${minTemp}°C`;
             document.getElementById("icon").style= "display: flex;";
             document.getElementById("icon").src = icon;
-            document.querySelector(".container-temp").style = "background-color: rgba(0, 0, 0, 0.6); border-radius:20px;";
-            document.getElementById("h1Text").style = "background-color: rgba(0, 0, 0, 0.6); border-radius:20px; width:50%;";
+            document.querySelector(".container-temp").style = h1TextStyle;
+            document.getElementById("h1Text").style = `${h1TextStyle} width:50%;`;
             
             var backUrlCss = "background-size: cover; background-repeat: no-repeat;";
             switch (data.weather[0].icon) {
