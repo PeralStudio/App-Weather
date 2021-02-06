@@ -1,4 +1,4 @@
 # ClimaFondo
 AppClima - Get Weather by Api
 
-![ClimaFondo](https://github.com/PeralStudio/ClimaFondo/blob/master/images/capture.png)
+![ClimaFondo](https://github.com/PeralStudio/ClimaFondo/blob/master/images/screenrecording.gif)
