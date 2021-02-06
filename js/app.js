@@ -52,6 +52,23 @@ function changeFavicon(src) {
     document.head.appendChild(link);
 }
 
+function clearWeather() {
+    changeFavicon('/favicon.ico');
+    document.title = oldTittle;
+    document.getElementById("temp").innerHTML = "";
+    document.getElementById("icon").innerHTML = "";
+    document.getElementById("inputCiudad").value = "";
+    document.getElementById("icon").style = "display: none;";
+    document.querySelector("body").style = ""
+    document.querySelector(".container-temp").style = "";
+    document.getElementById("h1Text").style = "";
+    document.getElementById("h1Text").innerHTML = "";
+    document.getElementById("temp").innerHTML = "";
+    document.getElementById("temp").style = "";
+    document.getElementById("temp-max").innerHTML = "";
+    document.getElementById("temp-min").innerHTML = "";
+}
+
 function Callweather() {
 
     var apiKey = "40efccd434eefd0344923485b60fbda7";
@@ -69,8 +86,9 @@ function Callweather() {
 
             const kelvin = 273.15;
             //Comprobar si input es void y mostrar toast
-            if (searchbox.value == "") {
+            if (searchbox.value == "" || data.code === 400) {
                 /* console.log("vacio"); */
+                clearWeather();
                 var x = document.getElementById("toast");
                 x.className = "show";
                 setTimeout(function() {
@@ -81,24 +99,12 @@ function Callweather() {
             }
 
             if (data.name === undefined) {
-                document.getElementById("h1Text").innerHTML = "Ciudad no encontrada";
-                //Timeout Error Message
-                setTimeout(() => {
-                    document.getElementById("h1Text").innerHTML = "";
-                }, 1500);
-                changeFavicon('/favicon.ico');
-                document.title = oldTittle;
-                document.getElementById("temp").innerHTML = "";
-                document.getElementById("icon").innerHTML = "";
-                document.getElementById("inputCiudad").value = "";
-                document.getElementById("icon").style = "display: none;";
-                document.querySelector("body").style = ""
-                document.querySelector(".container-temp").style = "";
-                document.getElementById("h1Text").style = h1TextStyle;
-                document.getElementById("temp").innerHTML = "";
-                document.getElementById("temp").style = "";
-                document.getElementById("temp-max").innerHTML = "";
-                document.getElementById("temp-min").innerHTML = "";
+                var x = document.getElementById("toast2");
+                x.className = "show";
+                setTimeout(function() {
+                    x.className = x.className.replace("show", "");
+                }, 3000);
+                clearWeather();
 
             } else {
                 var icon = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;

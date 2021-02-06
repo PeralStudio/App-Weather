@@ -77,7 +77,8 @@ border-bottom: 3px solid #3B444F;
 
 /* ----------------Toast input void---------------------- */
 
-#toast {
+#toast,
+#toast2 {
     visibility: hidden;
     min-width: 200px;
     margin-left: -125px;
@@ -93,7 +94,8 @@ border-bottom: 3px solid #3B444F;
     font-size: 17px;
 }
 
-#toast.show {
+#toast.show,
+#toast2.show {
     visibility: visible;
     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
@@ -178,7 +180,7 @@ border-bottom: 3px solid #3B444F;
 
 /* ----------- Media Query ----------- */
 
-@media only screen and (max-width: 730px) {
+@media only screen and (max-width: 880px) {
     .container-hora #hora {
         font-size: 25px;
         position: absolute;
