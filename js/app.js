@@ -1,29 +1,28 @@
 document.getElementById("icon").style = "display: none;";
 document.querySelector(".container-temp").style = "background-color: transparent;";
-let oldTittle = document.title;
 
+let oldTittle = document.title;
 const h1TextStyle = "background-color: rgba(0, 0, 0, 0.6); border-radius:20px;"
 const searchbox = document.querySelector(".inputCiudad");
 searchbox.addEventListener('keypress', setQuery);
+let hora = moment().format('HH:mm:ss');
 
+// Put Hour when load page
+document.getElementById('hora').innerHTML = hora
+
+//Interval for Hour refresh
+setInterval(() => {
+    hora = moment().format('HH:mm:ss');
+    document.getElementById('hora').innerHTML = hora;
+}, 1000);
+
+// fucntion for call Callweather() when press Enter = 13 keycode
 function setQuery(event) {
     if (event.which === 13) {
         /* console.log(searchbox.value); */
         Callweather();
     }
 }
-
-/* // Auto Detect City, Not work in mobile and Ublock
-function autoDetectCity() {
-    fetch(`http://ip-api.com/json`)
-    .then( res => res.json())
-    .then(response => {
-        document.querySelector(".inputCiudad").value = response.city;
-    })
-    .catch(status => {
-        console.log('Request failed.  Returned status of', status)
-    })
-  } */
 
 //SPINNER
 const spinner = document.getElementById("spinner");
@@ -74,7 +73,7 @@ function Callweather() {
                 /* console.log("vacio"); */
                 var x = document.getElementById("toast");
                 x.className = "show";
-                setTimeout(function () {
+                setTimeout(function() {
                     x.className = x.className.replace("show", "");
                 }, 3000);
 
@@ -108,7 +107,7 @@ function Callweather() {
                 var minTemp = parseFloat(data.main.temp_min - kelvin, 10).toFixed(0);
                 /* console.log(temp); */
                 document.title = `El Clima de ${data.name} es de: ${temp}°C, maxima: ${maxTemp}°C y minima: ${minTemp}°C`;
-                (data.weather[0].icon !== "" && data.weather[0].icon !== null) ? changeFavicon(icon) : changeFavicon('/favicon.ico');
+                (data.weather[0].icon !== "" && data.weather[0].icon !== null) ? changeFavicon(icon): changeFavicon('/favicon.ico');
                 document.getElementById("h1Text").innerHTML = data.name;
                 document.getElementById("temp").innerHTML = `${temp} °C`;
                 document.getElementById("temp").style = "border-radius: 10px; text-shadow:  3px 3px grey";
@@ -123,25 +122,41 @@ function Callweather() {
 
                 switch (data.weather[0].icon) {
 
-                    case "01d": document.querySelector("body").style = `background-image: url(images/soleado2.jpg); ${backUrlCss}`;
+                    case "01d":
+                        document.querySelector("body").style = `background-image: url(images/soleado2.jpg); ${backUrlCss}`;
                         break;
-                    case "01n": document.querySelector("body").style = `background-image: url(images/noche-despejada.jpg); ${backUrlCss}`;
+                    case "01n":
+                        document.querySelector("body").style = `background-image: url(images/noche-despejada.jpg); ${backUrlCss}`;
                         break;
-                    case "04d": case "03d": case "02d": document.querySelector("body").style = `background-image: url(images/nublado.jpg); ${backUrlCss}`;
+                    case "04d":
+                    case "03d":
+                    case "02d":
+                        document.querySelector("body").style = `background-image: url(images/nublado.jpg); ${backUrlCss}`;
                         break;
-                    case "04n": case "03n": case "02n": case "04n": document.querySelector("body").style = `background-image: url(images/nublado-noche.jpg); ${backUrlCss}`;
+                    case "04n":
+                    case "03n":
+                    case "02n":
+                    case "04n":
+                        document.querySelector("body").style = `background-image: url(images/nublado-noche.jpg); ${backUrlCss}`;
                         break;
-                    case "50d": document.querySelector("body").style = `background-image: url(images/niebla.jpg); ${backUrlCss}`;
+                    case "50d":
+                        document.querySelector("body").style = `background-image: url(images/niebla.jpg); ${backUrlCss}`;
                         break;
-                    case "50n": document.querySelector("body").style = `background-image: url(images/niebla-noche.jpg); ${backUrlCss}`;
+                    case "50n":
+                        document.querySelector("body").style = `background-image: url(images/niebla-noche.jpg); ${backUrlCss}`;
                         break;
-                    case "10d": document.querySelector("body").style = `background-image: url(images/lluvia.jpg); ${backUrlCss}`;
+                    case "10d":
+                        document.querySelector("body").style = `background-image: url(images/lluvia.jpg); ${backUrlCss}`;
                         break;
-                    case "10n": case "09n": document.querySelector("body").style = `background-image: url(images/lluvia-noche.jpg); ${backUrlCss}`;
+                    case "10n":
+                    case "09n":
+                        document.querySelector("body").style = `background-image: url(images/lluvia-noche.jpg); ${backUrlCss}`;
                         break;
-                    case "13d": document.querySelector("body").style = `background-image: url(images/nieve.jpg); ${backUrlCss}`;
+                    case "13d":
+                        document.querySelector("body").style = `background-image: url(images/nieve.jpg); ${backUrlCss}`;
                         break;
-                    case "13n": document.querySelector("body").style = `background-image: url(images/nieve-noche.jpg); ${backUrlCss}`;
+                    case "13n":
+                        document.querySelector("body").style = `background-image: url(images/nieve-noche.jpg); ${backUrlCss}`;
                         break;
                 }
 

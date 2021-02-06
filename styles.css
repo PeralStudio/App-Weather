@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "ds-digi";
+    src: url("./fonts/DS-DIGI.TTF");
+}
+
 html {
     height: 100%;
 }
@@ -9,17 +14,18 @@ html {
     color: honeydew;
     text-align: -webkit-center;
     margin-top: 50px;
-    background-position:center;
+    background-position: center;
 }
 
 p {
     font-size: 25px;
 }
 
+
 /* .inputCiudad {
-  border: none;
-  border-radius: 16px 0px 16px 0px;
-  border-bottom: 3px solid #3B444F;
+border: none;
+border-radius: 16px 0px 16px 0px;
+border-bottom: 3px solid #3B444F;
 } */
 
 .container {
@@ -29,9 +35,20 @@ p {
 }
 
 #h1Text {
-    display:flex; 
-    justify-content:center;
+    display: flex;
+    justify-content: center;
     margin-top: 5%;
+}
+
+.container-hora #hora {
+    font-family: ds-digi;
+    font-size: 45px;
+    position: absolute;
+    right: 40px;
+    top: 30px;
+    background-color: rgba(26, 28, 23, 0.58);
+    border-radius: 5px;
+    width: 160px;
 }
 
 .container-temp {
@@ -58,113 +75,144 @@ p {
 }
 
 
-
 /* ----------------Toast input void---------------------- */
+
 #toast {
-  visibility: hidden;
-  min-width: 200px;
-  margin-left: -125px;
-  background-color: rgb(161, 45, 45);
-  color: #fff;
-  text-align: center;
-  border-radius: 10px;
-  padding: 16px;
-  position: fixed;
-  z-index: 1;
-  top: 5px;
-  right: 7rem;
-  font-size: 17px;
+    visibility: hidden;
+    min-width: 200px;
+    margin-left: -125px;
+    background-color: rgb(161, 45, 45);
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    top: 5px;
+    right: 7rem;
+    font-size: 17px;
 }
 
 #toast.show {
-  visibility: visible;
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
 @-webkit-keyframes fadein {
-  from {top: 0; opacity: 0;}
-  to {top: 5px; opacity: 1;}
+    from {
+        top: 0;
+        opacity: 0;
+    }
+    to {
+        top: 5px;
+        opacity: 1;
+    }
 }
 
 @keyframes fadein {
-  from {top: 0; opacity: 0;}
-  to {top: 5px; opacity: 1;}
+    from {
+        top: 0;
+        opacity: 0;
+    }
+    to {
+        top: 5px;
+        opacity: 1;
+    }
 }
 
 @-webkit-keyframes fadeout {
-  from {top: 5px; opacity: 1;}
-  to {top: 0; opacity: 0;}
+    from {
+        top: 5px;
+        opacity: 1;
+    }
+    to {
+        top: 0;
+        opacity: 0;
+    }
 }
 
 @keyframes fadeout {
-  from {top: 5px; opacity: 1;}
-  to {top: 0; opacity: 0;}
+    from {
+        top: 5px;
+        opacity: 1;
+    }
+    to {
+        top: 0;
+        opacity: 0;
+    }
 }
 
 
 /* ----------------SPINNER---------------------- */
-#spinner{
-  display: none;
-  width: 80px;
-  height: 80px;
 
-  border: 2px solid #f3f3f3;
-  border-top:3px solid #f25a41;
-  border-radius: 100%;
-
-  position: absolute;
-  top: 0%;
-  bottom: 8%;
-  left: 46%;
-  right: 46%;
-  margin: auto;
-
-  animation: spin 1s infinite linear;
-}
-
-@keyframes spin {
-  from {
-      transform: rotate(0deg);
-  } to {
-      transform: rotate(360deg);
-  }
-}
-
-#spinner.show {
-  display:flex;
-}
-
-/* ----------- Media Query Spinner ----------- */
-@media only screen and (max-width: 414px) {
-  #spinner{
+#spinner {
     display: none;
     width: 80px;
     height: 80px;
-  
     border: 2px solid #f3f3f3;
-    border-top:3px solid #f25a41;
+    border-top: 3px solid #f25a41;
     border-radius: 100%;
-  
     position: absolute;
     top: 0%;
     bottom: 8%;
-    left: 40%;
+    left: 46%;
     right: 46%;
     margin: auto;
-  
     animation: spin 1s infinite linear;
-  }
-  
-  @keyframes spin {
+}
+
+@keyframes spin {
     from {
         transform: rotate(0deg);
-    } to {
+    }
+    to {
         transform: rotate(360deg);
     }
-  }
-  
-  #spinner.show {
-    display:flex;
-  }
+}
+
+#spinner.show {
+    display: flex;
+}
+
+
+/* ----------- Media Query ----------- */
+
+@media only screen and (max-width: 730px) {
+    .container-hora #hora {
+        font-size: 25px;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        width: 100px;
+    }
+}
+
+@media only screen and (max-width: 414px) {
+    #spinner {
+        display: none;
+        width: 80px;
+        height: 80px;
+        border: 2px solid #f3f3f3;
+        border-top: 3px solid #f25a41;
+        border-radius: 100%;
+        position: absolute;
+        top: 0%;
+        bottom: 8%;
+        left: 40%;
+        right: 46%;
+        margin: auto;
+        animation: spin 1s infinite linear;
+    }
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    #spinner.show {
+        display: flex;
+    }
 }
