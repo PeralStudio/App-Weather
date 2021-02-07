@@ -42,13 +42,13 @@ border-bottom: 3px solid #3B444F;
 
 .container-hora #hora {
     font-family: ds-digi;
-    font-size: 45px;
+    font-size: 25px;
     position: absolute;
     right: 40px;
     top: 30px;
     background-color: rgba(26, 28, 23, 0.58);
     border-radius: 5px;
-    width: 160px;
+    width: 100px;
 }
 
 .container-temp {

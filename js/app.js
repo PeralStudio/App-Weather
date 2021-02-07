@@ -1,5 +1,3 @@
-document.querySelector(".container-temp").style = "background-color: transparent;";
-
 let oldTittle = document.title;
 const h1TextStyle = "background-color: rgba(0, 0, 0, 0.6); border-radius:20px;"
 const searchbox = document.querySelector(".inputCiudad");
@@ -16,12 +14,7 @@ setInterval(() => {
 }, 1000);
 
 // fucntion for call Callweather() when press Enter = 13 keycode
-function setQuery(event) {
-    if (event.which === 13) {
-        /* console.log(searchbox.value); */
-        Callweather();
-    }
-}
+function setQuery(event) { event.which === 13 ? Callweather() : null };
 
 //SPINNER
 const spinner = document.getElementById("spinner");
@@ -54,7 +47,6 @@ function changeFavicon(src) {
 function clearWeather() {
     changeFavicon('/favicon.ico');
     document.title = oldTittle;
-    document.getElementById("temp").innerHTML = "";
     document.getElementById("icon").innerHTML = "";
     document.getElementById("inputCiudad").value = "";
     document.getElementById("icon").style = "display: none;";
@@ -70,8 +62,10 @@ function clearWeather() {
 
 function Callweather() {
 
-    var apiKey = "40efccd434eefd0344923485b60fbda7";
-    var cityName = document.getElementById("inputCiudad").value;
+    const apiKey = "40efccd434eefd0344923485b60fbda7";
+    const cityName = document.getElementById("inputCiudad").value;
+    const backUrlCss = "background-size: cover; background-repeat: no-repeat;";
+    const kelvin = 273.15;
     /* console.log(cityName); */
 
     //Show Spinner
@@ -80,15 +74,15 @@ function Callweather() {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`)
         .then(res => res.json())
         .then(data => {
-            //Hide Spinner Cuando la Data esta lista
+            //Hide Spinner when Data ready
             hideSpinner();
 
-            const kelvin = 273.15;
             //Comprobar si input es void y mostrar toast
             if (searchbox.value == "" || data.code === 400) {
                 /* console.log("vacio"); */
                 clearWeather();
-                var x = document.getElementById("toast");
+                console.clear();
+                let x = document.getElementById("toast");
                 x.className = "show";
                 setTimeout(function () {
                     x.className = x.className.replace("show", "");
@@ -98,18 +92,19 @@ function Callweather() {
             }
 
             if (data.name === undefined) {
-                var x = document.getElementById("toast2");
+                let x = document.getElementById("toast2");
                 x.className = "show";
                 setTimeout(function () {
                     x.className = x.className.replace("show", "");
                 }, 3000);
                 clearWeather();
+                console.clear();
 
             } else {
-                var icon = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
-                var temp = parseFloat(data.main.temp - kelvin, 10).toFixed(0);
-                var maxTemp = parseFloat(data.main.temp_max - kelvin, 10).toFixed(0);
-                var minTemp = parseFloat(data.main.temp_min - kelvin, 10).toFixed(0);
+                const icon = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
+                const temp = parseFloat(data.main.temp - kelvin, 10).toFixed(0);
+                const maxTemp = parseFloat(data.main.temp_max - kelvin, 10).toFixed(0);
+                const minTemp = parseFloat(data.main.temp_min - kelvin, 10).toFixed(0);
                 /* console.log(temp); */
                 document.title = `El Clima de ${data.name} es de: ${temp}°C, maxima: ${maxTemp}°C y minima: ${minTemp}°C`;
                 (data.weather[0].icon !== "" && data.weather[0].icon !== null) ? changeFavicon(icon) : changeFavicon('/favicon.ico');
@@ -122,8 +117,6 @@ function Callweather() {
                 document.getElementById("icon").src = icon;
                 document.querySelector(".container-temp").style = h1TextStyle;
                 document.getElementById("h1Text").style = `${h1TextStyle} width:50%;`;
-
-                var backUrlCss = "background-size: cover; background-repeat: no-repeat;";
 
                 switch (data.weather[0].icon) {
 
