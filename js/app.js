@@ -1,3 +1,4 @@
+document.getElementById("icon").innerHTML = "";
 document.getElementById("icon").style = "display: none;";
 document.querySelector(".container-temp").style = "background-color: transparent;";
 
@@ -91,7 +92,7 @@ function Callweather() {
                 clearWeather();
                 var x = document.getElementById("toast");
                 x.className = "show";
-                setTimeout(function() {
+                setTimeout(function () {
                     x.className = x.className.replace("show", "");
                 }, 3000);
 
@@ -101,7 +102,7 @@ function Callweather() {
             if (data.name === undefined) {
                 var x = document.getElementById("toast2");
                 x.className = "show";
-                setTimeout(function() {
+                setTimeout(function () {
                     x.className = x.className.replace("show", "");
                 }, 3000);
                 clearWeather();
@@ -113,7 +114,7 @@ function Callweather() {
                 var minTemp = parseFloat(data.main.temp_min - kelvin, 10).toFixed(0);
                 /* console.log(temp); */
                 document.title = `El Clima de ${data.name} es de: ${temp}°C, maxima: ${maxTemp}°C y minima: ${minTemp}°C`;
-                (data.weather[0].icon !== "" && data.weather[0].icon !== null) ? changeFavicon(icon): changeFavicon('/favicon.ico');
+                (data.weather[0].icon !== "" && data.weather[0].icon !== null) ? changeFavicon(icon) : changeFavicon('/favicon.ico');
                 document.getElementById("h1Text").innerHTML = data.name;
                 document.getElementById("temp").innerHTML = `${temp} °C`;
                 document.getElementById("temp").style = "border-radius: 10px; text-shadow:  3px 3px grey";
