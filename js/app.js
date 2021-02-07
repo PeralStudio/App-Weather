@@ -81,7 +81,7 @@ function Callweather() {
             if (searchbox.value == "" || data.code === 400) {
                 /* console.log("vacio"); */
                 clearWeather();
-                // Clear Error 404 & 400 from Api
+                // Clear Error 404 & 400 by Api in console log
                 console.clear();
                 let x = document.getElementById("toast");
                 x.className = "show";
@@ -99,7 +99,7 @@ function Callweather() {
                     x.className = x.className.replace("show", "");
                 }, 3000);
                 clearWeather();
-                // Clear Error 404 & 400 from Api
+                // Clear Error 404 & 400 by Api in console log
                 console.clear();
 
             } else {
