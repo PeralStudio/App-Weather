@@ -66,7 +66,6 @@ function Callweather() {
     const cityName = document.getElementById("inputCiudad").value;
     const backUrlCss = "background-size: cover; background-repeat: no-repeat;";
     const kelvin = 273.15;
-    /* console.log(cityName); */
 
     //Show Spinner
     showSpinner();
@@ -79,7 +78,6 @@ function Callweather() {
 
             //Comprobar si input es void y mostrar toast
             if (searchbox.value == "" || data.code === 400) {
-                /* console.log("vacio"); */
                 clearWeather();
                 // Clear Error 404 & 400 by Api in console log
                 console.clear();
