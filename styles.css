@@ -67,6 +67,16 @@ border-bottom: 3px solid #3B444F;
     height: 100px;
 }
 
+#flag {
+    text-align: center;
+    width: 100px;
+    height: 70px;
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    border-radius: 10px;
+}
+
 #temp {
     text-align: center;
     font-size: 60px;
@@ -187,6 +197,15 @@ border-bottom: 3px solid #3B444F;
         right: 10px;
         top: 10px;
         width: 100px;
+    }
+    #flag {
+    text-align: center;
+    width: 70px;
+    height: 40px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    border-radius: 5px;
     }
 }
 

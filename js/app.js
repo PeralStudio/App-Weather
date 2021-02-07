@@ -14,7 +14,7 @@ setInterval(() => {
 }, 1000);
 
 // fucntion for call Callweather() when press Enter = 13 keycode
-function setQuery(event) { event.which === 13 ? Callweather() : null };
+function setQuery(event) { if (event.which === 13) Callweather(); };
 
 //SPINNER
 const spinner = document.getElementById("spinner");
@@ -58,6 +58,7 @@ function clearWeather() {
     document.getElementById("temp").style = "";
     document.getElementById("temp-max").innerHTML = "";
     document.getElementById("temp-min").innerHTML = "";
+    document.getElementById("flag").style = 'display: none;';
 }
 
 function Callweather() {
@@ -101,10 +102,20 @@ function Callweather() {
                 console.clear();
 
             } else {
+                // Fetch Api flags, take and put
+                fetch(`https://restcountries.eu/rest/v2/alpha/${data.sys.country}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        document.getElementById("flag").style = 'display: block;';
+                        document.getElementById("flag").src = data.flag;
+
+                    });
+
                 const icon = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
                 const temp = parseFloat(data.main.temp - kelvin, 10).toFixed(0);
                 const maxTemp = parseFloat(data.main.temp_max - kelvin, 10).toFixed(0);
                 const minTemp = parseFloat(data.main.temp_min - kelvin, 10).toFixed(0);
+
                 document.title = `El Clima de ${data.name} es de: ${temp}°C, maxima: ${maxTemp}°C y minima: ${minTemp}°C`;
                 (data.weather[0].icon !== "" && data.weather[0].icon !== null) ? changeFavicon(icon) : changeFavicon('/favicon.ico');
                 document.getElementById("h1Text").innerHTML = data.name;
@@ -158,6 +169,14 @@ function Callweather() {
                 }
 
                 document.getElementById("inputCiudad").value = "";
+
             }
         });
 }
+
+
+
+
+
+
+
