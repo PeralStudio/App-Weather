@@ -1,4 +1,3 @@
-document.getElementById("icon").innerHTML = "";
 document.getElementById("icon").style = "display: none;";
 document.querySelector(".container-temp").style = "background-color: transparent;";
 
