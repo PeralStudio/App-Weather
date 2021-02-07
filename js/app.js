@@ -81,6 +81,7 @@ function Callweather() {
             if (searchbox.value == "" || data.code === 400) {
                 /* console.log("vacio"); */
                 clearWeather();
+                // Clear Error 404 & 400 from Api
                 console.clear();
                 let x = document.getElementById("toast");
                 x.className = "show";
@@ -98,6 +99,7 @@ function Callweather() {
                     x.className = x.className.replace("show", "");
                 }, 3000);
                 clearWeather();
+                // Clear Error 404 & 400 from Api
                 console.clear();
 
             } else {
@@ -105,7 +107,6 @@ function Callweather() {
                 const temp = parseFloat(data.main.temp - kelvin, 10).toFixed(0);
                 const maxTemp = parseFloat(data.main.temp_max - kelvin, 10).toFixed(0);
                 const minTemp = parseFloat(data.main.temp_min - kelvin, 10).toFixed(0);
-                /* console.log(temp); */
                 document.title = `El Clima de ${data.name} es de: ${temp}°C, maxima: ${maxTemp}°C y minima: ${minTemp}°C`;
                 (data.weather[0].icon !== "" && data.weather[0].icon !== null) ? changeFavicon(icon) : changeFavicon('/favicon.ico');
                 document.getElementById("h1Text").innerHTML = data.name;
