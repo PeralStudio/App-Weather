@@ -13,7 +13,7 @@ html {
     background: cover;
     color: honeydew;
     text-align: -webkit-center;
-    margin-top: 50px;
+    margin-top: 150px;
     background-position: center;
 }
 
@@ -206,6 +206,15 @@ border-bottom: 3px solid #3B444F;
     top: 10px;
     left: 10px;
     border-radius: 5px;
+    }
+    #body {
+    background-color: darkslateblue;
+    background-image: url("/images/mainfondo.gif");
+    background: cover;
+    color: honeydew;
+    text-align: -webkit-center;
+    margin-top: 100px;
+    background-position: center;
     }
 }
 
