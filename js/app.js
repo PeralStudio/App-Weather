@@ -1,7 +1,16 @@
 let oldTittle = document.title;
 const h1TextStyle = "background-color: rgba(0, 0, 0, 0.6); border-radius:20px;"
 const searchbox = document.querySelector(".inputCiudad");
+// Listener inputciudad
 searchbox.addEventListener('keypress', setQuery);
+const icon = document.getElementById("icon");
+const temp = document.getElementById("temp");
+const tempMax = document.getElementById("temp-max");
+const tempMin = document.getElementById("temp-min");
+const docBody = document.querySelector("body");
+const docH1Text = document.getElementById("h1Text");
+const docFlag = document.getElementById("flag");
+const docContainerTemp = document.querySelector(".container-temp");
 let hora = moment().format('HH:mm:ss');
 
 // Put Hour when load page
@@ -47,24 +56,24 @@ function changeFavicon(src) {
 function clearWeather() {
     changeFavicon('/favicon.ico');
     document.title = oldTittle;
-    document.getElementById("icon").innerHTML = "";
-    document.getElementById("inputCiudad").value = "";
-    document.getElementById("icon").style = "display: none;";
-    document.querySelector("body").style = ""
-    document.querySelector(".container-temp").style = "";
-    document.getElementById("h1Text").style = "";
-    document.getElementById("h1Text").innerHTML = "";
-    document.getElementById("temp").innerHTML = "";
-    document.getElementById("temp").style = "";
-    document.getElementById("temp-max").innerHTML = "";
-    document.getElementById("temp-min").innerHTML = "";
-    document.getElementById("flag").style = 'display: none;';
+    icon.innerHTML = "";
+    icon.style = "display: none;";
+    searchbox.value = "";
+    docBody.style = ""
+    docContainerTemp.style = "";
+    docH1Text.style = "";
+    docH1Text.innerHTML = "";
+    temp.innerHTML = "";
+    temp.style = "";
+    tempMax.innerHTML = "";
+    tempMin.innerHTML = "";
+    docFlag.style = 'display: none;';
 }
 
 function Callweather() {
 
     const apiKey = "40efccd434eefd0344923485b60fbda7";
-    const cityName = document.getElementById("inputCiudad").value;
+    const cityName = searchbox.value;
     const backUrlCss = "background-size: cover; background-repeat: no-repeat;";
     const kelvin = 273.15;
 
@@ -106,69 +115,69 @@ function Callweather() {
                 fetch(`https://restcountries.eu/rest/v2/alpha/${data.sys.country}`)
                     .then(res => res.json())
                     .then(data => {
-                        document.getElementById("flag").style = 'display: block;';
-                        document.getElementById("flag").src = data.flag;
+                        docFlag.style = 'display: block;';
+                        docFlag.src = data.flag;
 
                     });
 
-                const icon = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
-                const temp = parseFloat(data.main.temp - kelvin, 10).toFixed(0);
-                const maxTemp = parseFloat(data.main.temp_max - kelvin, 10).toFixed(0);
-                const minTemp = parseFloat(data.main.temp_min - kelvin, 10).toFixed(0);
+                const iconImg = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
+                const tempCelsius = parseFloat(data.main.temp - kelvin, 10).toFixed(0);
+                const maxTempCelsius = parseFloat(data.main.temp_max - kelvin, 10).toFixed(0);
+                const minTempCelsius = parseFloat(data.main.temp_min - kelvin, 10).toFixed(0);
 
-                document.title = `El Clima de ${data.name} es de: ${temp}°C, maxima: ${maxTemp}°C y minima: ${minTemp}°C`;
-                (data.weather[0].icon !== "" && data.weather[0].icon !== null) ? changeFavicon(icon) : changeFavicon('/favicon.ico');
-                document.getElementById("h1Text").innerHTML = data.name;
-                document.getElementById("temp").innerHTML = `${temp} °C`;
-                document.getElementById("temp").style = "border-radius: 10px; text-shadow:  3px 3px grey";
-                document.getElementById("temp-max").innerHTML = `Máxima: ${maxTemp}°C`;
-                document.getElementById("temp-min").innerHTML = `Mínima: ${minTemp}°C`;
-                document.getElementById("icon").style = "display: flex;";
-                document.getElementById("icon").src = icon;
-                document.querySelector(".container-temp").style = h1TextStyle;
-                document.getElementById("h1Text").style = `${h1TextStyle} width:50%;`;
+                document.title = `El Clima de ${data.name} es de: ${tempCelsius}°C, maxima: ${maxTempCelsius}°C y minima: ${minTempCelsius}°C`;
+                (data.weather[0].icon !== "" && data.weather[0].icon !== null) ? changeFavicon(iconImg) : changeFavicon('/favicon.ico');
+                docH1Text.innerHTML = data.name;
+                temp.innerHTML = `${tempCelsius} °C`;
+                temp.style = "border-radius: 10px; text-shadow:  3px 3px grey";
+                tempMax.innerHTML = `Máxima: ${maxTempCelsius}°C`;
+                tempMin.innerHTML = `Mínima: ${minTempCelsius}°C`;
+                icon.style = "display: flex;";
+                icon.src = iconImg;
+                docContainerTemp.style = h1TextStyle;
+                docH1Text.style = `${h1TextStyle} width:50%;`;
 
                 switch (data.weather[0].icon) {
 
                     case "01d":
-                        document.querySelector("body").style = `background-image: url(images/soleado2.jpg); ${backUrlCss}`;
+                        docBody.style = `background-image: url(images/soleado2.jpg); ${backUrlCss}`;
                         break;
                     case "01n":
-                        document.querySelector("body").style = `background-image: url(images/noche-despejada.jpg); ${backUrlCss}`;
+                        docBody.style = `background-image: url(images/noche-despejada.jpg); ${backUrlCss}`;
                         break;
                     case "04d":
                     case "03d":
                     case "02d":
-                        document.querySelector("body").style = `background-image: url(images/nublado.jpg); ${backUrlCss}`;
+                        docBody.style = `background-image: url(images/nublado.jpg); ${backUrlCss}`;
                         break;
                     case "04n":
                     case "03n":
                     case "02n":
                     case "04n":
-                        document.querySelector("body").style = `background-image: url(images/nublado-noche.jpg); ${backUrlCss}`;
+                        docBody.style = `background-image: url(images/nublado-noche.jpg); ${backUrlCss}`;
                         break;
                     case "50d":
-                        document.querySelector("body").style = `background-image: url(images/niebla.jpg); ${backUrlCss}`;
+                        docBody.style = `background-image: url(images/niebla.jpg); ${backUrlCss}`;
                         break;
                     case "50n":
-                        document.querySelector("body").style = `background-image: url(images/niebla-noche.jpg); ${backUrlCss}`;
+                        docBody.style = `background-image: url(images/niebla-noche.jpg); ${backUrlCss}`;
                         break;
                     case "10d":
-                        document.querySelector("body").style = `background-image: url(images/lluvia.jpg); ${backUrlCss}`;
+                        docBody.style = `background-image: url(images/lluvia.jpg); ${backUrlCss}`;
                         break;
                     case "10n":
                     case "09n":
-                        document.querySelector("body").style = `background-image: url(images/lluvia-noche.jpg); ${backUrlCss}`;
+                        docBody.style = `background-image: url(images/lluvia-noche.jpg); ${backUrlCss}`;
                         break;
                     case "13d":
-                        document.querySelector("body").style = `background-image: url(images/nieve.jpg); ${backUrlCss}`;
+                        docBody.style = `background-image: url(images/nieve.jpg); ${backUrlCss}`;
                         break;
                     case "13n":
-                        document.querySelector("body").style = `background-image: url(images/nieve-noche.jpg); ${backUrlCss}`;
+                        docBody.style = `background-image: url(images/nieve-noche.jpg); ${backUrlCss}`;
                         break;
                 }
 
-                document.getElementById("inputCiudad").value = "";
+                searchbox.value = "";
 
             }
         });
