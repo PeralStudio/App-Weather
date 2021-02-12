@@ -1,8 +1,5 @@
 let oldTittle = document.title;
 const h1TextStyle = "background-color: rgba(0, 0, 0, 0.6); border-radius:20px;"
-const searchbox = document.querySelector(".inputCiudad");
-// Listener inputciudad
-searchbox.addEventListener('keypress', setQuery);
 const icon = document.getElementById("icon");
 const temp = document.getElementById("temp");
 const tempMax = document.getElementById("temp-max");
@@ -11,6 +8,9 @@ const docBody = document.querySelector("body");
 const docH1Text = document.getElementById("h1Text");
 const docFlag = document.getElementById("flag");
 const docContainerTemp = document.querySelector(".container-temp");
+const searchbox = document.querySelector(".inputCiudad");
+// Listener inputciudad
+searchbox.addEventListener('keypress', setQuery);
 let hora = moment().format('HH:mm:ss');
 
 // Put Hour when load page
