@@ -1,7 +1,7 @@
 let oldTittle = document.title;
 const h1TextStyle = "background-color: rgba(0, 0, 0, 0.6); border-radius:20px;"
-const icon = document.getElementById("icon");
-const temp = document.getElementById("temp");
+const docIcon = document.getElementById("icon");
+const docTemp = document.getElementById("temp");
 const tempMax = document.getElementById("temp-max");
 const tempMin = document.getElementById("temp-min");
 const docBody = document.querySelector("body");
@@ -56,15 +56,15 @@ function changeFavicon(src) {
 function clearWeather() {
     changeFavicon('/favicon.ico');
     document.title = oldTittle;
-    icon.innerHTML = "";
-    icon.style = "display: none;";
+    docIcon.innerHTML = "";
+    docIcon.style = "display: none;";
     searchbox.value = "";
     docBody.style = ""
     docContainerTemp.style = "";
     docH1Text.style = "";
     docH1Text.innerHTML = "";
-    temp.innerHTML = "";
-    temp.style = "";
+    docTemp.innerHTML = "";
+    docTemp.style = "";
     tempMax.innerHTML = "";
     tempMin.innerHTML = "";
     docFlag.style = 'display: none;';
@@ -128,12 +128,12 @@ function Callweather() {
                 document.title = `El Clima de ${data.name} es de: ${tempCelsius}°C, maxima: ${maxTempCelsius}°C y minima: ${minTempCelsius}°C`;
                 (data.weather[0].icon !== "" && data.weather[0].icon !== null) ? changeFavicon(iconImg) : changeFavicon('/favicon.ico');
                 docH1Text.innerHTML = data.name;
-                temp.innerHTML = `${tempCelsius} °C`;
-                temp.style = "border-radius: 10px; text-shadow:  3px 3px grey";
+                docTemp.innerHTML = `${tempCelsius} °C`;
+                docTemp.style = "border-radius: 10px; text-shadow:  3px 3px grey";
                 tempMax.innerHTML = `Máxima: ${maxTempCelsius}°C`;
                 tempMin.innerHTML = `Mínima: ${minTempCelsius}°C`;
-                icon.style = "display: flex;";
-                icon.src = iconImg;
+                docIcon.style = "display: flex;";
+                docIcon.src = iconImg;
                 docContainerTemp.style = h1TextStyle;
                 docH1Text.style = `${h1TextStyle} width:50%;`;
 
