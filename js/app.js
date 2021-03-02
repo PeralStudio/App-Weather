@@ -1,5 +1,5 @@
 let oldTittle = document.title;
-const h1TextStyle = "background-color: rgba(0, 0, 0, 0.6); border-radius:20px;"
+
 const docIcon = document.getElementById("icon");
 const docTemp = document.getElementById("temp");
 const tempMax = document.getElementById("temp-max");
@@ -9,6 +9,7 @@ const docH1Text = document.getElementById("h1Text");
 const docFlag = document.getElementById("flag");
 const docContainerTemp = document.querySelector(".container-temp");
 const searchbox = document.querySelector(".inputCiudad");
+
 // Listener inputciudad
 searchbox.addEventListener('keypress', setQuery);
 let hora = moment().format('HH:mm:ss');
@@ -22,6 +23,7 @@ setInterval(() => {
     document.getElementById('hora').innerHTML = hora;
 }, 1000);
 
+
 // fucntion for call Callweather() when press Enter = 13 keycode
 function setQuery(event) { if (event.which === 13) Callweather(); };
 
@@ -34,6 +36,7 @@ function showSpinner() {
         hideSpinner();
     }, 1000);
 }
+
 
 //SPINNER STOP
 const hideSpinner = () => spinner.className = spinner.className.replace("show", "");
@@ -53,6 +56,7 @@ function changeFavicon(src) {
     document.head.appendChild(link);
 }
 
+
 function clearWeather() {
     changeFavicon('/favicon.ico');
     document.title = oldTittle;
@@ -70,11 +74,12 @@ function clearWeather() {
     docFlag.style = 'display: none;';
 }
 
+
 function Callweather() {
 
     const apiKey = "40efccd434eefd0344923485b60fbda7";
     const cityName = searchbox.value;
-    const backUrlCss = "background-size: cover; background-repeat: no-repeat;";
+    const h1TextStyle = "background-color: rgba(0, 0, 0, 0.6); border-radius:20px;";
     const kelvin = 273.15;
 
     //Show Spinner
@@ -111,6 +116,8 @@ function Callweather() {
                 console.clear();
 
             } else {
+
+                docFlag.style.display = 'none';
                 // Fetch Api flags, take and put
                 fetch(`https://restcountries.eu/rest/v2/alpha/${data.sys.country}`)
                     .then(res => res.json())
@@ -137,55 +144,29 @@ function Callweather() {
                 docContainerTemp.style = h1TextStyle;
                 docH1Text.style = `${h1TextStyle} width:50%;`;
 
-                switch (data.weather[0].icon) {
+                let image = [
+                    { id: "01d", imagen: 'soleado2.jpg' },
+                    { id: "01n", imagen: 'noche-despejada.jpg' },
+                    { id: "02n", imagen: 'nublado-noche.jpg' },
+                    { id: "03n", imagen: 'nublado-noche.jpg' },
+                    { id: "04n", imagen: 'nublado-noche.jpg' },
+                    { id: "50d", imagen: 'niebla.jpg' },
+                    { id: "50n", imagen: 'niebla-noche.jpg' },
+                    { id: "02d", imagen: 'nublado.jpg' },
+                    { id: "03d", imagen: 'nublado.jpg' },
+                    { id: "04d", imagen: 'nublado.jpg' },
+                    { id: "04n", imagen: 'lluvia.jpg' },
+                    { id: "10d", imagen: 'lluvia.jpg' },
+                    { id: "10n", imagen: 'lluvia-noche.jpg' },
+                    { id: "09n", imagen: 'lluvia-noche.jpg' },
+                    { id: "13d", imagen: 'nieve.jpg' },
+                    { id: "13n", imagen: 'nieve-noche.jpg' }
+                ];
 
-                    case "01d":
-                        docBody.style = `background-image: url(images/soleado2.jpg); ${backUrlCss}`;
-                        break;
-                    case "01n":
-                        docBody.style = `background-image: url(images/noche-despejada.jpg); ${backUrlCss}`;
-                        break;
-                    case "04d":
-                    case "03d":
-                    case "02d":
-                        docBody.style = `background-image: url(images/nublado.jpg); ${backUrlCss}`;
-                        break;
-                    case "04n":
-                    case "03n":
-                    case "02n":
-                    case "04n":
-                        docBody.style = `background-image: url(images/nublado-noche.jpg); ${backUrlCss}`;
-                        break;
-                    case "50d":
-                        docBody.style = `background-image: url(images/niebla.jpg); ${backUrlCss}`;
-                        break;
-                    case "50n":
-                        docBody.style = `background-image: url(images/niebla-noche.jpg); ${backUrlCss}`;
-                        break;
-                    case "10d":
-                        docBody.style = `background-image: url(images/lluvia.jpg); ${backUrlCss}`;
-                        break;
-                    case "10n":
-                    case "09n":
-                        docBody.style = `background-image: url(images/lluvia-noche.jpg); ${backUrlCss}`;
-                        break;
-                    case "13d":
-                        docBody.style = `background-image: url(images/nieve.jpg); ${backUrlCss}`;
-                        break;
-                    case "13n":
-                        docBody.style = `background-image: url(images/nieve-noche.jpg); ${backUrlCss}`;
-                        break;
-                }
+                const a = image.find(element => element.id === data.weather[0].icon);
+                docBody.style = `background-image: url(images/${a.imagen});background-size: cover;`;
 
                 searchbox.value = "";
-
             }
         });
 }
-
-
-
-
-
-
-
