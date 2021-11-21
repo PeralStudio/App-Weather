@@ -12,9 +12,12 @@ const searchbox = document.querySelector(".inputCiudad");
 
 // Listener inputciudad
 searchbox.addEventListener('keypress', setQuery);
-let hora = moment().format('HH:mm:ss');
+// function for call Callweather() when press Enter = 13 keycode
+function setQuery(event) { if (event.which === 13) Callweather(); };
+
 
 // Put Hour when load page
+let hora = moment().format('HH:mm:ss');
 document.getElementById('hora').innerHTML = hora
 
 //Interval for Hour refresh
@@ -22,10 +25,6 @@ setInterval(() => {
     hora = moment().format('HH:mm:ss');
     document.getElementById('hora').innerHTML = hora;
 }, 1000);
-
-
-// fucntion for call Callweather() when press Enter = 13 keycode
-function setQuery(event) { if (event.which === 13) Callweather(); };
 
 //SPINNER
 const spinner = document.getElementById("spinner");
@@ -37,42 +36,11 @@ function showSpinner() {
     }, 1000);
 }
 
-
 //SPINNER STOP
 const hideSpinner = () => spinner.className = spinner.className.replace("show", "");
 
 //Change Favicon
 document.head = document.head || document.getElementsByTagName('head')[0];
-
-function changeFavicon(src) {
-    var link = document.createElement('link'),
-        oldLink = document.getElementById('dynamic-favicon');
-    link.id = 'dynamic-favicon';
-    link.rel = 'shortcut icon';
-    link.href = src;
-    if (oldLink) {
-        document.head.removeChild(oldLink);
-    }
-    document.head.appendChild(link);
-}
-
-
-function clearWeather() {
-    changeFavicon('/favicon.ico');
-    document.title = oldTittle;
-    docIcon.innerHTML = "";
-    docIcon.style = "display: none;";
-    searchbox.value = "";
-    docBody.style = ""
-    docContainerTemp.style = "";
-    docH1Text.style = "";
-    docH1Text.innerHTML = "";
-    docTemp.innerHTML = "";
-    docTemp.style = "";
-    tempMax.innerHTML = "";
-    tempMin.innerHTML = "";
-    docFlag.style = 'display: none;';
-}
 
 
 function Callweather() {
@@ -112,12 +80,10 @@ function Callweather() {
                     x.className = x.className.replace("show", "");
                 }, 3000);
                 clearWeather();
-                // Clear Error 404 & 400 by Api in console log
-                console.clear();
 
             } else {
-
                 docFlag.style.display = 'none';
+
                 // Fetch Api flags, take and put
                 fetch(`https://restcountries.eu/rest/v2/alpha/${data.sys.country}`)
                     .then(res => res.json())
@@ -144,29 +110,57 @@ function Callweather() {
                 docContainerTemp.style = h1TextStyle;
                 docH1Text.style = `${h1TextStyle} width:50%;`;
 
-                let image = [
-                    { id: "01d", imagen: 'soleado2.jpg' },
-                    { id: "01n", imagen: 'noche-despejada.jpg' },
-                    { id: "02n", imagen: 'nublado-noche.jpg' },
-                    { id: "03n", imagen: 'nublado-noche.jpg' },
-                    { id: "04n", imagen: 'nublado-noche.jpg' },
-                    { id: "50d", imagen: 'niebla.jpg' },
-                    { id: "50n", imagen: 'niebla-noche.jpg' },
-                    { id: "02d", imagen: 'nublado.jpg' },
-                    { id: "03d", imagen: 'nublado.jpg' },
-                    { id: "04d", imagen: 'nublado.jpg' },
-                    { id: "04n", imagen: 'lluvia.jpg' },
-                    { id: "10d", imagen: 'lluvia.jpg' },
-                    { id: "10n", imagen: 'lluvia-noche.jpg' },
-                    { id: "09n", imagen: 'lluvia-noche.jpg' },
-                    { id: "13d", imagen: 'nieve.jpg' },
-                    { id: "13n", imagen: 'nieve-noche.jpg' }
+                let images = [
+                    { id: "01d", image: 'soleado2.jpg' },
+                    { id: "01n", image: 'noche-despejada.jpg' },
+                    { id: "02n", image: 'nublado-noche.jpg' },
+                    { id: "03n", image: 'nublado-noche.jpg' },
+                    { id: "04n", image: 'nublado-noche.jpg' },
+                    { id: "50d", image: 'niebla.jpg' },
+                    { id: "50n", image: 'niebla-noche.jpg' },
+                    { id: "02d", image: 'nublado.jpg' },
+                    { id: "03d", image: 'nublado.jpg' },
+                    { id: "04d", image: 'nublado.jpg' },
+                    { id: "10d", image: 'lluvia.jpg' },
+                    { id: "10n", image: 'lluvia-noche.jpg' },
+                    { id: "09n", image: 'lluvia-noche.jpg' },
+                    { id: "13d", image: 'nieve.jpg' },
+                    { id: "13n", image: 'nieve-noche.jpg' }
                 ];
 
-                const a = image.find(element => element.id === data.weather[0].icon);
-                docBody.style = `background-image: url(images/${a.imagen});background-size: cover;`;
+                const iconId = images.find(element => element.id === data.weather[0].icon);
+                docBody.style = `background-image: url(images/${iconId.image});background-size: cover;`;
 
                 searchbox.value = "";
             }
         });
+}
+
+
+function changeFavicon(src) {
+    let link = document.createElement('link');
+    let oldLink = document.getElementById('dynamic-favicon');
+    link.id = 'dynamic-favicon';
+    link.rel = 'shortcut icon';
+    link.href = src;
+    if (oldLink) document.head.removeChild(oldLink);
+    document.head.appendChild(link);
+}
+
+
+function clearWeather() {
+    changeFavicon('/favicon.ico');
+    document.title = oldTittle;
+    docIcon.innerHTML = "";
+    docIcon.style = "display: none;";
+    searchbox.value = "";
+    docBody.style = ""
+    docContainerTemp.style = "";
+    docH1Text.style = "";
+    docH1Text.innerHTML = "";
+    docTemp.innerHTML = "";
+    docTemp.style = "";
+    tempMax.innerHTML = "";
+    tempMin.innerHTML = "";
+    docFlag.style = 'display: none;';
 }
